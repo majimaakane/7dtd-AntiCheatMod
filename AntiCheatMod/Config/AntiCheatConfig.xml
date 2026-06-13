@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AntiCheatConfig>
+    <!-- 管理者として扱うパーミッションレベルの上限（この値以下は管理者として扱う） -->
+    <!-- パーミッションレベル: 0=最高権限, 1=管理者, 1000=一般 -->
+    <AdminPermissionLevel>1</AdminPermissionLevel>
+
+    <!-- 各検出機能の有効/無効 (true/false) -->
+    <Detection>
+        <!-- コンソールコマンド傍受 (cm, dm, give等) -->
+        <BlockConsoleCommands>true</BlockConsoleCommands>
+        <!-- 飛行検出 -->
+        <DetectFlying>true</DetectFlying>
+        <!-- テレポート検出 -->
+        <DetectTeleport>true</DetectTeleport>
+        <!-- スピードハック検出 -->
+        <DetectSpeedHack>true</DetectSpeedHack>
+        <!-- ゴッドモード検出 -->
+        <DetectGodMode>true</DetectGodMode>
+    </Detection>
+
+    <!-- 検出閾値 -->
+    <Thresholds>
+        <!-- テレポート検出: 1フレームでこの距離(m)以上移動した場合に検出 -->
+        <TeleportDistance>80</TeleportDistance>
+        <!-- スピードハック検出: 通常の最大速度の何倍を超えたら検出するか -->
+        <SpeedMultiplier>2.5</SpeedMultiplier>
+        <!-- 飛行検出: 地面から離れている連続時間(秒)がこの値を超えたら検出 -->
+        <FlyingDuration>5.0</FlyingDuration>
+        <!-- 監視間隔(秒) -->
+        <MonitorInterval>2.0</MonitorInterval>
+    </Thresholds>
+
+    <!-- 違反時のアクション -->
+    <Violation>
+        <!-- 警告メッセージをプレイヤーに表示 -->
+        <WarnPlayer>true</WarnPlayer>
+        <!-- 管理者にチャットで通知 -->
+        <NotifyAdmins>true</NotifyAdmins>
+        <!-- キックまでの違反回数 -->
+        <MaxWarnings>3</MaxWarnings>
+        <!-- BANまでのキック回数 (0=BANしない) -->
+        <KicksBeforeBan>0</KicksBeforeBan>
+        <!-- 違反カウントのリセット時間(分) (0=リセットしない) -->
+        <ViolationResetMinutes>30</ViolationResetMinutes>
+        <!-- キック後に違反カウントをリセットするか (true=リセット/false=引き継ぐ) -->
+        <ResetOnKick>true</ResetOnKick>
+    </Violation>
+
+    <!-- ログ設定 -->
+    <Logging>
+        <!-- 専用ログファイルに記録 -->
+        <EnableFileLog>true</EnableFileLog>
+        <!-- ログファイル名 -->
+        <LogFileName>AntiCheat.log</LogFileName>
+    </Logging>
+</AntiCheatConfig>
