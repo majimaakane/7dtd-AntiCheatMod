@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -203,7 +203,7 @@ namespace AntiCheatMod
             World world = GameManager.Instance.World;
             bool isNearLadder = world != null && IsNearLadder(world, player);
 
-            // 足元3ブロック以内に固体ブロックがある場合はジャンプしながらブロック設置中とみなす
+            // 足元5ブロック以内に固体ブロックがある場合はジャンプしながらブロック設置中とみなす
             bool isNearGround = world != null && IsNearGround(world, player);
 
             if (!isGrounded && !isInWater && !isNearLadder && !isNearGround)

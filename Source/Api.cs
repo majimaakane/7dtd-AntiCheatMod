@@ -97,7 +97,7 @@ namespace AntiCheatMod
                 // 管理者でない場合のみ監視開始
                 if (!isAdmin)
                 {
-                    _playerMonitor.StartTracking(data.ClientInfo.entityId);
+                    _playerMonitor.StartTracking(data.EntityId);
                     Logger.Log($"[AntiCheatMod] {data.ClientInfo.playerName} の監視を開始");
                 }
             }

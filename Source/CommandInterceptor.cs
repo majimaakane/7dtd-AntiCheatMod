@@ -1,76 +1,16 @@
 using System;
-using System.Collections.Generic;
 
 namespace AntiCheatMod
 {
     /// <summary>
-    /// コンソールコマンドを傍受し、非管理者による不正コマンド実行を防止する。
+    /// チャット経由のチートコマンドを傍受し、非管理者による不正操作を防止する。
+    /// 注: 7DTD ModAPI にはサーバーコンソールコマンドを傍受するイベントが存在しないため、
+    ///     非管理者プレイヤーがチャットから送信するコマンド形式のメッセージのみ対象。
     /// </summary>
     public class CommandInterceptor
     {
         private readonly AntiCheatConfig _config;
         private readonly ViolationHandler _violationHandler;
-
-        /// <summary>非管理者に対してブロックするコマンドのリスト</summary>
-        private static readonly HashSet<string> BlockedCommands = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            // クリエイティブ・デバッグモード
-            "cm",
-            "creativemenu",
-            "dm",
-            "debugmenu",
-            "debug",
-
-            // アイテムスポーン
-            "give",
-            "giveselfxp",
-            "gi",
-
-            // バフ・デバフ操作
-            "buff",
-            "debuff",
-            "buffplayer",
-            "debuffplayer",
-
-            // エンティティ・物資スポーン
-            "spawnentity",
-            "se",
-            "spawnsupply",
-            "spawnsupplycrate",
-
-            // テレポート
-            "teleport",
-            "tp",
-            "teleportplayer",
-            "tele",
-
-            // ワールド操作
-            "settime",
-            "st",
-            "weather",
-            "killall",
-            "kill",
-
-            // その他の危険なコマンド
-            "shutdown",
-            "ban",
-            "kick",
-            "whitelist",
-            "admin",
-            "removequest",
-            "givequest",
-            "setgamepref",
-            "setgamestat",
-            "ggs",
-            "sgp",
-            "exhausted",
-            "thirsty",
-            "starving",
-            "chunkcache",
-            "shownexthordetime",
-            "enablescope",
-            "spectrum",
-        };
 
         /// <summary>チャットコマンドとしてブロックするプレフィックス</summary>
         private static readonly string[] BlockedChatPrefixes = new string[]
@@ -89,35 +29,6 @@ namespace AntiCheatMod
         {
             _config = config;
             _violationHandler = violationHandler;
-        }
-
-        /// <summary>
-        /// コンソールコマンド実行時のチェック。
-        /// 管理者以外がブロック対象コマンドを実行しようとした場合に違反処理を行う。
-        /// trueを返すとコマンドをブロックする。
-        /// </summary>
-        public bool CheckCommand(ClientInfo clientInfo, string command)
-        {
-            if (!_config.BlockConsoleCommands) return false;
-            if (clientInfo == null) return false;
-
-            // 管理者はすべて許可
-            if (AdminChecker.IsAdmin(clientInfo, _config)) return false;
-
-            // コマンド名を抽出（最初の単語）
-            string cmdName = ExtractCommandName(command);
-            if (string.IsNullOrEmpty(cmdName)) return false;
-
-            // ブロック対象コマンドかチェック
-            if (BlockedCommands.Contains(cmdName))
-            {
-                Logger.Log($"[CommandInterceptor] ブロック: {clientInfo.playerName} がコマンド '{command}' を実行しようとしました");
-                _violationHandler.HandleViolation(clientInfo, ViolationType.ConsoleCommand,
-                    $"コマンド実行試行: {command}");
-                return true; // コマンドをブロック
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -147,13 +58,6 @@ namespace AntiCheatMod
             return false;
         }
 
-        /// <summary>コマンド文字列からコマンド名を抽出</summary>
-        private string ExtractCommandName(string command)
-        {
-            if (string.IsNullOrEmpty(command)) return null;
-            string trimmed = command.Trim();
-            int spaceIdx = trimmed.IndexOf(' ');
-            return spaceIdx > 0 ? trimmed.Substring(0, spaceIdx) : trimmed;
-        }
+
     }
 }

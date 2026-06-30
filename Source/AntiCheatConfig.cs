@@ -15,6 +15,7 @@ namespace AntiCheatMod
         public int AdminPermissionLevel { get; set; } = 1;
 
         // --- 検出設定 ---
+        /// <summary>チャット経由のチートコマンド（/give, /fly 等）をブロック</summary>
         public bool BlockConsoleCommands { get; set; } = true;
         public bool DetectFlying { get; set; } = true;
         public bool DetectTeleport { get; set; } = true;

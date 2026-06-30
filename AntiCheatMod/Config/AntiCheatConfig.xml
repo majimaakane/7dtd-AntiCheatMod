@@ -6,7 +6,7 @@
 
     <!-- 各検出機能の有効/無効 (true/false) -->
     <Detection>
-        <!-- コンソールコマンド傍受 (cm, dm, give等) -->
+        <!-- チャット経由のチートコマンドブロック (/give, /fly, /god 等) -->
         <BlockConsoleCommands>true</BlockConsoleCommands>
         <!-- 飛行検出 -->
         <DetectFlying>true</DetectFlying>
