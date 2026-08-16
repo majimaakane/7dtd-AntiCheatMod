@@ -2,7 +2,7 @@
 <xml>
   <Name value="AntiCheatMod" />
   <DisplayName value="Anti-Cheat Mod" />
-  <Version value="1.0.7" />
+  <Version value="1.0.8" />
   <Description value="7DTD マルチサーバー用チーター防止Mod。非管理者のチート行為を検出・防止します。" />
   <Author value="AKANE" />
   <Website value="" />
